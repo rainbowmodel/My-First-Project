@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rainbow School - About</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #ff758c, #ff7eb3);
+      color: white;
+      overflow-x: hidden;
+      position: relative;
+    }
+    header {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 20px;
+      font-size: 2em;
+      font-weight: bold;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    #overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(4px);
+      display: none;
+      z-index: 999;
+    }
+    .sidebar {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: rgba(0, 0, 0, 0.9);
+      overflow-x: hidden;
+      transition: 0.5s ease;
+      padding-top: 60px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+    }
+    .sidebar a {
+      padding: 15px 30px;
+      text-decoration: none;
+      font-size: 1.3em;
+      color: white;
+      transition: 0.3s;
+      position: relative;
+    }
+    .sidebar a::after {
+      content: '';
+      position: absolute;
+      left: 30px;
+      bottom: 10px;
+      height: 2px;
+      width: 0;
+      background: #ff7eb3;
+      transition: 0.4s;
+    }
+    .sidebar a:hover::after {
+      width: 70%;
+    }
+    .sidebar a:hover {
+      color: #ff7eb3;
+    }
+    .sidebar .closebtn {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 2em;
+      cursor: pointer;
+      color: #ff7eb3;
+    }
+    main {
+      padding: 50px 20px;
+      text-align: center;
+      z-index: 1;
+      position: relative;
+    }
+    .back-button {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 25px;
+      font-size: 1em;
+      text-decoration: none;
+      border-radius: 30px;
+      background-color: white;
+      color: #ff7eb3;
+      transition: 0.3s;
+      font-weight: bold;
+      border: 2px solid transparent;
+    }
+    .back-button:hover {
+      background-color: transparent;
+      border: 2px solid white;
+      color: white;
+    }
+  </style>
+</head>
+
+<body ontouchstart="startTouch(event)" ontouchend="endTouch(event)">
+
+<div id="overlay" onclick="closeSidebar()"></div>
+
+<div id="mySidebar" class="sidebar">
+  <span class="closebtn" onclick="closeSidebar()">&times;</span>
+  <a href="index.html">Home</a>
+  <a href="#">About</a>
+  <a href="#">Courses</a>
+  <a href="#">Contact</a>
+</div>
+
+<header>
+  Rainbow School - About
+</header>
+
+<main>
+  <h1>About Our School</h1>
+  <p>We provide quality education with love and care.</p>
+  <a href="index.html" class="back-button">Back to Home</a>
+</main>
+
+<script>
+  let xDown = null;
+  let yDown = null;
+
+  function startTouch(evt) {
+    const firstTouch = evt.touches[0];
+    xDown = firstTouch.clientX;
+    yDown = firstTouch.clientY;
+  }
+
+  function endTouch(evt) {
+    if (!xDown || !yDown) return;
+
+    let xUp = evt.changedTouches[0].clientX;
+    let yUp = evt.changedTouches[0].clientY;
+
+    let xDiff = xDown - xUp;
+    let yDiff = yDown - yUp;
+
+    if (Math.abs(xDiff) > Math.abs(yDiff)) { 
+      if (xDiff < -50) { 
+        openSidebar();
+      }
+    }
+    xDown = null;
+    yDown = null;
+  }
+
+  function openSidebar() {
+    document.getElementById("mySidebar").style.width = "250px";
+    document.getElementById("overlay").style.display = "block";
+  }
+
+  function closeSidebar() {
+    document.getElementById("mySidebar").style.width = "0";
+    document.getElementById("overlay").style.display = "none";
+  }
+</script>
+
+</body>
+</html>
