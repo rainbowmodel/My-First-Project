@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rainbow School - Page 2</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #ff758c, #ff7eb3);
+      color: white;
+      text-align: center;
+      overflow-x: hidden;
+    }
+    header {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 20px;
+      font-size: 2em;
+      font-weight: bold;
+      position: relative;
+    }
+    main {
+      padding: 50px 20px;
+    }
+    p {
+      font-size: 1.2em;
+      margin: 20px 0;
+    }
+    a.button {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 15px 40px;
+      font-size: 1.2em;
+      font-weight: bold;
+      border: none;
+      border-radius: 50px;
+      background: linear-gradient(135deg, #2575fc, #6a11cb);
+      color: white;
+      text-decoration: none;
+      transition: 0.4s ease;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    a.button:hover {
+      transform: translate(-50%, -5px);
+      box-shadow: 0 12px 20px rgba(0,0,0,0.4);
+    }
+    a.button:active {
+      transform: translate(-50%, 2px);
+      box-shadow: 0 6px 10px rgba(0,0,0,0.2);
+    }
+
+    /* Menu Style */
+    #menu {
+      position: fixed;
+      top: 0;
+      left: -300px;
+      width: 250px;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(10px);
+      padding-top: 80px;
+      transition: 0.5s ease;
+      z-index: 1000;
+      border-right: 2px solid #ffffff30;
+    }
+    #menu a {
+      display: block;
+      padding: 15px 30px;
+      color: white;
+      text-decoration: none;
+      font-size: 1.5em;
+      transition: 0.3s;
+      letter-spacing: 1px;
+    }
+    #menu a:hover {
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: #fff;
+      transform: translateX(10px);
+    }
+    #overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 500;
+    }
+    /* Close Button */
+    #closeBtn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 2em;
+      color: white;
+      cursor: pointer;
+    }
+    #closeBtn:hover {
+      color: #ff758c;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Sidebar Menu -->
+<div id="menu">
+  <div id="closeBtn" onclick="closeMenu()">&times;</div>
+  <a href="index.html">Home</a>
+  <a href="page2.html">Page 2</a>
+  <a href="#">About Us</a>
+  <a href="#">Contact</a>
+</div>
+<div id="overlay" onclick="closeMenu()"></div>
+
+<header>Rainbow School</header>
+
+<main>
+  <h1>Thank You!</h1>
+  <p>You have successfully reached Page 2.</p>
+  <a class="button" href="index.html">Go Back</a>
+</main>
+
+<script>
+let startX = 0;
+let endX = 0;
+
+// Touch start
+document.addEventListener('touchstart', function(e) {
+  startX = e.touches[0].clientX;
+}, false);
+
+// Touch end
+document.addEventListener('touchend', function(e) {
+  endX = e.changedTouches[0].clientX;
+  handleSwipe();
+}, false);
+
+function handleSwipe() {
+  if (endX - startX > 100) { // swipe right
+    openMenu();
+  }
+}
+
+function openMenu() {
+  document.getElementById("menu").style.left = "0";
+  document.getElementById("overlay").style.display = "block";
+}
+
+function closeMenu() {
+  document.getElementById("menu").style.left = "-300px";
+  document.getElementById("overlay").style.display = "none";
+}
+</script>
+
+</body>
+</html>
